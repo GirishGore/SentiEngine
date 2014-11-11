@@ -1,4 +1,4 @@
-package com.ideas.SentimentAnalysis.core;
+package com.senti.SentimentAnalysis.core;
 
 
 /*
@@ -21,7 +21,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public License
 along with this project.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 
 
@@ -57,45 +57,40 @@ from Brian Goetz of Quiotix Corporation (brian@quiotix.com).
 
 Release 4
 
-*/
+ */
 
-import java.io.*;
 import java.util.List;
-
 
 import edu.mit.jwi.morph.WordnetStemmer;
 import edu.sussex.nlp.jws.JWS;
 
-import net.didion.jwnl.JWNL;
-import net.didion.jwnl.data.POS;
-
 
 /**
-* Stemmer, implementing the Porter Stemming Algorithm
-*
-* The Stemmer class transforms a word into its root form.  The input
-* word can be provided a character at time (by calling add()), or at once
-* by calling one of the various stem(something) methods.
-*/
+ * Stemmer, implementing the Porter Stemming Algorithm
+ *
+ * The Stemmer class transforms a word into its root form.  The input
+ * word can be provided a character at time (by calling add()), or at once
+ * by calling one of the various stem(something) methods.
+ */
 
 class Stemmer
-{  
-	
-	//private static final POS NNS = null;
-	
-	public static void main(String[] args)
-	{
-		
-		
-	}
-	
-	public List<String> getStems(String word)
-	{
-		JWS ws = new JWS("C:\\Program Files (x86)\\WordNet\\","2.1");  
-		WordnetStemmer stem =  new WordnetStemmer(ws.getDictionary());
-		//System.out.println("test" + stem.findStems("reading",null) );
-		List<String> stemmed = stem.findStems(word,null);		
-		return stemmed;
-	}
-	
+{
+
+    //private static final POS NNS = null;
+
+    public static void main(String[] args)
+    {
+
+
+    }
+
+    public List<String> getStems(String word)
+    {
+        JWS ws = new JWS("C:\\Program Files (x86)\\WordNet\\","2.1");
+        WordnetStemmer stem =  new WordnetStemmer(ws.getDictionary());
+        //System.out.println("test" + stem.findStems("reading",null) );
+        List<String> stemmed = stem.findStems(word,null);
+        return stemmed;
+    }
+
 }

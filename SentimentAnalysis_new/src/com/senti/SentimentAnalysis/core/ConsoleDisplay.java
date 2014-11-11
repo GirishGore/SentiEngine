@@ -1,7 +1,7 @@
-package com.ideas.SentimentAnalysis.core;
+package com.senti.SentimentAnalysis.core;
 
 public interface ConsoleDisplay {
-	
-	public void DisplayOnConsole(String msg);
+
+    public void DisplayOnConsole(String msg);
 
 }

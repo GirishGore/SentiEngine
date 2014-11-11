@@ -8,12 +8,12 @@ import opennlp.tools.util.InvalidFormatException;
 
 import org.junit.Test;
 
-import com.ideas.SentimentAnalysis.core.AspectSentimentPair;
-import com.ideas.SentimentAnalysis.core.ConsoleDisplay;
-import com.ideas.SentimentAnalysis.core.OpenNLPIntegration;
-import com.ideas.SentimentAnalysis.core.Sentence;
-import com.ideas.SentimentAnalysis.core.SentiWordNet;
-import com.ideas.SentimentAnalysis.core.SentimentAnalyzer;
+import com.senti.SentimentAnalysis.core.AspectSentimentPair;
+import com.senti.SentimentAnalysis.core.ConsoleDisplay;
+import com.senti.SentimentAnalysis.core.OpenNLPIntegration;
+import com.senti.SentimentAnalysis.core.Sentence;
+import com.senti.SentimentAnalysis.core.SentiWordNet;
+import com.senti.SentimentAnalysis.core.SentimentAnalyzer;
 
 
 public class SocialInsightsModuleAcceptanceTest implements ConsoleDisplay {

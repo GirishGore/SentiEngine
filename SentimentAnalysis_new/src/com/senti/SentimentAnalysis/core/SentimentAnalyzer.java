@@ -1,4 +1,4 @@
-package com.ideas.SentimentAnalysis.core;
+package com.senti.SentimentAnalysis.core;
 import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -15,7 +15,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.hospitality.sentimentanalysis.database.DatabaseQueryExecuter;
-import com.ideas.SentimentAnalysis.service.Stemmer;
 
 public class SentimentAnalyzer {
 
