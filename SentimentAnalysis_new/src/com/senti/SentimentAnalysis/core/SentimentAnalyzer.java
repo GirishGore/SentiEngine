@@ -201,9 +201,9 @@ public class SentimentAnalyzer {
                     String sentiment = aspectSentimentPair.getSentiment();
                     double sentimentvalue = sentiWordNet.extract(sentiment, "a");
 
-                    if(sentencecount > 22 && sentencecount < 26 ) {
-                        System.out.println("                 Id "+sentencecount+"| Aspect --"+ aspect + "| Sentiment --" +  sentiment + "| Value :: " +  sentimentvalue);
-                    }
+                    //                    if(sentencecount > 22 && sentencecount < 26 ) {
+                    //                        System.out.println("                 Id "+sentencecount+"| Aspect --"+ aspect + "| Sentiment --" +  sentiment + "| Value :: " +  sentimentvalue);
+                    //                    }
 
                     if(sentimentvalue < 0) {
                         negative++;
@@ -257,10 +257,6 @@ public class SentimentAnalyzer {
                 }
             }
         }
-        //		System.out.println("Final Sentiments :  Negative "+ negative + " Positive :"+ positive +" Neutral " + neutral);
-        //		double negativepercent = ((double)negative/(double)(negative+positive+neutral));
-        //		double positivepercent = (positive/(negative+positive+neutral));
-        //		double neutralpercent  = (neutral/(negative+positive+neutral));
 
 
         System.out.println(" Overall % negative   :" +  negative/(negative+positive+neutral) +     " | Overall % positive   :"+positive/(negative+positive+neutral));
@@ -313,18 +309,17 @@ public class SentimentAnalyzer {
     }
 
 
-    private StringBuilder updateDbForRooms(double negativeR, double positiveR, double neutralR) {
+    private void updateDbForRooms(double negativeR, double positiveR, double neutralR) {
         StringBuilder sb = new StringBuilder();
         sb.append( "  INSERT INTO socialinsightsinference " +
                 "   VALUES(1,'ROOMS', " + negativeR/(negativeR+positiveR+neutralR) + ","+positiveR/(negativeR+positiveR+neutralR)+","+neutralR/(negativeR+positiveR+neutralR)+" ); "
                 );
         DatabaseQueryExecuter.execute(sb.toString());
         sb.setLength(0);
-        return sb;
     }
 
 
-    private StringBuilder updateDbForOverall(double negative, double positive, double neutral) {
+    private void updateDbForOverall(double negative, double positive, double neutral) {
         StringBuilder sb = new StringBuilder();
         sb.append(  "  INSERT INTO socialinsightsinference " +
                 "   VALUES(1,'OVERALL', " + negative/(negative+positive+neutral) + "," +positive/(negative+positive+neutral)+ "," +neutral/(negative+positive+neutral)  + " ); "
@@ -333,7 +328,6 @@ public class SentimentAnalyzer {
 
         DatabaseQueryExecuter.execute(sb.toString());
         sb.setLength(0);
-        return sb;
     }
 }
 
