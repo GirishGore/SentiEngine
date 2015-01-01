@@ -34,7 +34,6 @@ public class SentimentAnalyzer {
         this.consoleDisplay = consoleDisplay;
         this.openNLP = openNLP;
         stemmer = new Stemmer();
-        //  model = new POSModelLoader().load(new File("C:\\MySystem\\V5i\\Eclipse\\FunctionSpace\\JavaWordnet\\model\\en-pos-maxent.bin"));
         model = new POSModelLoader().load(new File(System.getProperty("user.dir")+"\\SentimentAnalysis_new\\model\\en-pos-maxent.bin"));
 
     }
@@ -49,7 +48,7 @@ public class SentimentAnalyzer {
 
             StringBuilder collatedreviewdoc = null;
             @Override
-            public StringBuilder extractData(ResultSet rs) throws SQLException, DataAccessException {
+            public StringBuilder extractData(final ResultSet rs) throws SQLException, DataAccessException {
                 while (rs.next())
                 {
                     if(collatedreviewdoc == null) {
@@ -273,8 +272,59 @@ public class SentimentAnalyzer {
         // ---------------------------------------------------------------------------------
 
         DatabaseQueryExecuter.execute("TRUNCATE TABLE socialinsightsinference");
-        StringBuilder collatedreviewdoc = null;
 
+        updateDbForOverall(negative, positive, neutral);
+        updateDbForRooms(negativeR, positiveR, neutralR);
+        updateDbForFoodBev(negativeF, positiveF, neutralF);
+        updateDbForGeneralStaff(negativeS, positiveS, neutralS);
+        updateDbForGeneralHotel(negativeH, positiveH, neutralH);
+
+        consoleDisplay.DisplayOnConsole("Categorizing the Aspects into categories and associating values to sentiments ...");
+    }
+
+
+    private void updateDbForGeneralHotel(double negativeH, double positiveH, double neutralH) {
+        StringBuilder sb = new StringBuilder();
+        sb.append( "  INSERT INTO socialinsightsinference " +
+                "   VALUES(1,'GENERAL HOTEL', " + negativeH/(negativeH+positiveH+neutralH) + ","+positiveH/(negativeH+positiveH+neutralH)+","+neutralH/(negativeH+positiveH+neutralH)+" ); "
+                );
+        DatabaseQueryExecuter.execute(sb.toString());
+        sb.setLength(0);
+    }
+
+
+    private void updateDbForGeneralStaff(double negativeS, double positiveS, double neutralS) {
+        StringBuilder sb = new StringBuilder();
+        sb.append( "  INSERT INTO socialinsightsinference " +
+                "   VALUES(1,'GENERAL STAFF', " + negativeS/(negativeS+positiveS+neutralS) + ","+positiveS/(negativeS+positiveS+neutralS)+","+neutralS/(negativeS+positiveS+neutralS)+" ); "
+                );
+        DatabaseQueryExecuter.execute(sb.toString());
+        sb.setLength(0);
+    }
+
+
+    private void updateDbForFoodBev(double negativeF, double positiveF, double neutralF) {
+        StringBuilder sb = new StringBuilder();
+        sb.append( "  INSERT INTO socialinsightsinference " +
+                "   VALUES(1,'FOOD & BEVERAGE', " + negativeF/(negativeF+positiveF+neutralF) + ","+positiveF/(negativeF+positiveF+neutralF)+","+neutralF/(negativeF+positiveF+neutralF)+" ); "
+                );
+        DatabaseQueryExecuter.execute(sb.toString());
+        sb.setLength(0);
+    }
+
+
+    private StringBuilder updateDbForRooms(double negativeR, double positiveR, double neutralR) {
+        StringBuilder sb = new StringBuilder();
+        sb.append( "  INSERT INTO socialinsightsinference " +
+                "   VALUES(1,'ROOMS', " + negativeR/(negativeR+positiveR+neutralR) + ","+positiveR/(negativeR+positiveR+neutralR)+","+neutralR/(negativeR+positiveR+neutralR)+" ); "
+                );
+        DatabaseQueryExecuter.execute(sb.toString());
+        sb.setLength(0);
+        return sb;
+    }
+
+
+    private StringBuilder updateDbForOverall(double negative, double positive, double neutral) {
         StringBuilder sb = new StringBuilder();
         sb.append(  "  INSERT INTO socialinsightsinference " +
                 "   VALUES(1,'OVERALL', " + negative/(negative+positive+neutral) + "," +positive/(negative+positive+neutral)+ "," +neutral/(negative+positive+neutral)  + " ); "
@@ -283,32 +333,7 @@ public class SentimentAnalyzer {
 
         DatabaseQueryExecuter.execute(sb.toString());
         sb.setLength(0);
-
-        sb.append( "  INSERT INTO socialinsightsinference " +
-                "   VALUES(1,'ROOMS', " + negativeR/(negativeR+positiveR+neutralR) + ","+positiveR/(negativeR+positiveR+neutralR)+","+neutralR/(negativeR+positiveR+neutralR)+" ); "
-                );
-        DatabaseQueryExecuter.execute(sb.toString());
-        sb.setLength(0);
-
-        sb.append( "  INSERT INTO socialinsightsinference " +
-                "   VALUES(1,'FOOD & BEVERAGE', " + negativeF/(negativeF+positiveF+neutralF) + ","+positiveF/(negativeF+positiveF+neutralF)+","+neutralF/(negativeF+positiveF+neutralF)+" ); "
-                );
-        DatabaseQueryExecuter.execute(sb.toString());
-        sb.setLength(0);
-
-        sb.append( "  INSERT INTO socialinsightsinference " +
-                "   VALUES(1,'GENERAL STAFF', " + negativeS/(negativeS+positiveS+neutralS) + ","+positiveS/(negativeS+positiveS+neutralS)+","+neutralS/(negativeS+positiveS+neutralS)+" ); "
-                );
-        DatabaseQueryExecuter.execute(sb.toString());
-        sb.setLength(0);
-
-        sb.append( "  INSERT INTO socialinsightsinference " +
-                "   VALUES(1,'GENERAL HOTEL', " + negativeH/(negativeH+positiveH+neutralH) + ","+positiveH/(negativeH+positiveH+neutralH)+","+neutralH/(negativeH+positiveH+neutralH)+" ); "
-                );
-        DatabaseQueryExecuter.execute(sb.toString());
-        sb.setLength(0);
-
-        consoleDisplay.DisplayOnConsole("Categorizing the Aspects into categories and associating values to sentiments ...");
+        return sb;
     }
 }
 
