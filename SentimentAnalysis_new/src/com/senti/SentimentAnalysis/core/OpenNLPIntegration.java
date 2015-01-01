@@ -57,7 +57,7 @@ public class OpenNLPIntegration {
 
     public String[] SentenceDetect(String reviewtext) throws InvalidFormatException, IOException {
         // always start with a model, a model is learned from training data
-        InputStream is = new FileInputStream("C:\\MySystem\\V5i\\Eclipse\\FunctionSpace\\JavaWordnet\\model\\en-sent.bin");
+        InputStream is = new FileInputStream(new File(System.getProperty("user.dir")+"\\SentimentAnalysis_new\\model\\en-sent.bin"));
         SentenceModel model = new SentenceModel(is);
         SentenceDetectorME sdetector = new SentenceDetectorME(model);
         String sentences[] = sdetector.sentDetect(reviewtext);

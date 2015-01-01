@@ -23,7 +23,7 @@ public class SentiWordNet {
             BufferedReader csv = null;
             try
             {
-                csv = new BufferedReader(new FileReader("C:\\MySystem\\V5i\\Eclipse\\FunctionSpace\\JavaWordnet\\model\\home\\swn\\www\\admin\\dump\\SentiWordNet_3.0.0_20130122.txt"));
+                csv = new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\SentimentAnalysis_new\\SentiWordNet_3.0.0_20130122.txt"));
                 int lineNumber = 0;
 
                 String line;

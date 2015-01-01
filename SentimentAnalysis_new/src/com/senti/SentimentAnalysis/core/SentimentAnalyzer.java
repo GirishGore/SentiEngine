@@ -34,7 +34,8 @@ public class SentimentAnalyzer {
         this.consoleDisplay = consoleDisplay;
         this.openNLP = openNLP;
         stemmer = new Stemmer();
-        model = new POSModelLoader().load(new File("C:\\MySystem\\V5i\\Eclipse\\FunctionSpace\\JavaWordnet\\model\\en-pos-maxent.bin"));
+        //  model = new POSModelLoader().load(new File("C:\\MySystem\\V5i\\Eclipse\\FunctionSpace\\JavaWordnet\\model\\en-pos-maxent.bin"));
+        model = new POSModelLoader().load(new File(System.getProperty("user.dir")+"\\SentimentAnalysis_new\\model\\en-pos-maxent.bin"));
 
     }
 
